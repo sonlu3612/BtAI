@@ -61,84 +61,84 @@ void drawMenu(int selected)
     cout << "\nDung mui ten va ENTER de dieu khien\n";
 }
 
-int inputMenu()
-{
-    vector<string> menu =
-    {
-        "Nhap tu ban phim",
-        "Nhap tu file"
-    };
+// int inputMenu()
+// {
+//     vector<string> menu =
+//     {
+//         "Nhap tu ban phim",
+//         "Nhap tu file"
+//     };
 
-    int selected=0;
+//     int selected=0;
 
-    while(true)
-    {
-        clear();
+//     while(true)
+//     {
+//         clear();
 
-        cout << "+--------------------------------------+\n";
-        cout << "|              CHON INPUT              |\n";
-        cout << "+--------------------------------------+\n";
+//         cout << "+--------------------------------------+\n";
+//         cout << "|              CHON INPUT              |\n";
+//         cout << "+--------------------------------------+\n";
 
-        for(int i=0;i<menu.size();i++)
-        {
-            cout << "| ";
+//         for(int i=0;i<menu.size();i++)
+//         {
+//             cout << "| ";
 
-            if(i == selected)
-            {
-                SetConsoleTextAttribute(
-                    GetStdHandle(STD_OUTPUT_HANDLE),
-                    240);
+//             if(i == selected)
+//             {
+//                 SetConsoleTextAttribute(
+//                     GetStdHandle(STD_OUTPUT_HANDLE),
+//                     240);
 
-                cout << "> " << menu[i];
+//                 cout << "> " << menu[i];
 
-                cout << string(30-menu[i].length(),' ');
+//                 cout << string(30-menu[i].length(),' ');
 
-                cout << "<";
+//                 cout << "<";
 
-                SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
-            }
-            else
-            {
-                cout << "  " << menu[i] << string(32-menu[i].length(),' ');
-            }
+//                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+//             }
+//             else
+//             {
+//                 cout << "  " << menu[i] << string(32-menu[i].length(),' ');
+//             }
 
-            cout << "|\n";
-        }
+//             cout << "|\n";
+//         }
 
-        cout << "+--------------------------------------+\n";
+//         cout << "+--------------------------------------+\n";
 
-        int key=_getch();
+//         int key=_getch();
 
-        if(key == 224)
-        {
-            key=_getch();
+//         if(key == 224)
+//         {
+//             key=_getch();
 
-            if(key == 72)
-            {
-                selected--;
+//             if(key == 72)
+//             {
+//                 selected--;
 
-                if(selected<0)
-                    selected=menu.size()-1;
-            }
+//                 if(selected<0)
+//                     selected=menu.size()-1;
+//             }
 
-            if(key == 80)
-            {
-                selected++;
+//             if(key == 80)
+//             {
+//                 selected++;
 
-                if(selected>=menu.size())
-                    selected=0;
-            }
-        }
+//                 if(selected>=menu.size())
+//                     selected=0;
+//             }
+//         }
 
-        else if(key == 13)
-        {
-            // return:
-            // 1 = keyboard input
-            // 2 = file input
-            return selected+1;
-        }
-    }
-}
+//         else if(key == 13)
+//         {
+//             // return:
+//             // 1 = keyboard input
+//             // 2 = file input
+//             return selected+1;
+//         }
+//     }
+// }
 
 
 
@@ -188,22 +188,22 @@ int main()
             if(selected == 3)
                 break;
 
-            int inputType = inputMenu();
+            // int inputType = inputMenu();
 
             string filename="";
 
-            if(inputType == 2)
-            {
+    //        if(inputType == 2)
+    //        {
                 clear();
 
                 cout<<"Nhap ten file : ";
                 cin>>filename;
-            }
+    //        }
 
             clear();
 
             cout << "Dang chay : " << menu[selected]
-                 << " (Input " << inputType << ")\n";
+                 << "\n";
 
             switch(selected)
             {
@@ -235,12 +235,9 @@ int main()
 
                 case 2:
                 {
-                    // ===== A STAR =====
+                    AStar_Run(filename);
 
-                    AStar_Run(inputType , filename);
-
-                    // astar.h :
-                    void AStar_Run(int inputType, const string& filename);
+                    void AStar_Run(const string& filename);
 
                     break;
                 }

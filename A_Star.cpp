@@ -86,7 +86,53 @@ void inputFile(char &start,char &end)
     fin.close();
 }
 
-void A_Star(char start,char end)
+// void input()
+// {
+//     cout << "Nhap so dinh: ";
+//     cin >> n;
+
+//     cout << "Nhap ten dinh va trong so cua dinh:\n";
+
+//     for (int i = 0; i < n; ++i)
+//     {
+//         char name;
+//         int h;
+
+//         cin >> name >> h;
+//         m[name] = h;
+//     }
+
+//     for (const auto& x : m)
+//     {
+//         char u = x.first;
+
+//         int k;
+//         cout << "Nhap so dinh ke voi " << u << ": ";
+//         cin >> k;
+
+//         cout << "Nhap dinh ke va cost:\n";
+
+//         for (int i = 0; i < k; ++i)
+//         {
+//             Edge e;
+//             cin >> e.v >> e.cost;
+
+//             adj[u - 'A'].push_back(e);
+//         }
+//     }
+
+//     char start, end;
+
+//     cout << "Nhap dinh bat dau: ";
+//     cin >> start;
+
+//     cout << "Nhap dinh ket thuc: ";
+//     cin >> end;
+
+//     A_Star(start, end);
+// }
+
+void A_Star(char start, char end)
 {
     vector<Node_A_Star> L;
 
@@ -179,7 +225,7 @@ void A_Star(char start,char end)
     }
 }
 
-void AStar_Run(int inputType, const string& filename)
+void AStar_Run(const string& filename)
 {
     char start, end;
 
@@ -188,15 +234,15 @@ void AStar_Run(int inputType, const string& filename)
     for(int i = 0; i < 100; i++)
         adj[i].clear();
 
-    if(inputType == 2)
-    {
+    // if(inputType == 2)
+    // {
         inputFile(start, end);
-    }
-    else
-    {
-        cout << "Keyboard input chua implement\n";
-        return;
-    }
+    // }
+    // else
+    // {
+    //     input();
+    //     return;
+    // }
 
-    A_Star(start,end);
+    A_Star(start, end);
 }
