@@ -1,3 +1,4 @@
+#include "A_Star.h"
 #include <iostream>
 #include <vector>
 #include <map>
@@ -10,24 +11,6 @@
 #define endl '\n'
 
 using namespace std;
-
-struct Edge
-{
-    char v;
-    int cost;
-};
-
-struct Node
-{
-    char id;
-    int g;
-    int h;
-
-    int f() const
-    {
-        return g + h;
-    }
-};
 
 bool cmp(Node a, Node b)
 {
@@ -194,16 +177,26 @@ void A_Star(char start,char end)
             cout << left << setw(6) << u.id << setw(6) << v << setw(8) << e.cost << setw(8) << hv << setw(8) << gv << setw(8) << fv << setw(30) << printL(L) << endl;
         }
     }
-    
 }
 
-int main()
+void AStar_Run(int inputType, const string& filename)
 {
-    char start,end;
+    char start, end;
 
-    inputFile(start,end);
+    m.clear();
+
+    for(int i = 0; i < 100; i++)
+        adj[i].clear();
+
+    if(inputType == 2)
+    {
+        inputFile(start, end);
+    }
+    else
+    {
+        cout << "Keyboard input chua implement\n";
+        return;
+    }
 
     A_Star(start,end);
-
-    return 0;
 }
