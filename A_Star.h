@@ -14,7 +14,7 @@ struct Edge
     int cost;
 };
 
-struct Node
+struct Node_A_Star
 {
     char id;
     int g;
@@ -32,9 +32,9 @@ extern vector<Edge> adj[100];
 
 extern map<char,int> m;
 
-bool cmp(Node a, Node b);
+bool cmp(Node_A_Star a, Node_A_Star b);
 
-string printL(vector<Node> L);
+string printL(vector<Node_A_Star> L);
 
 void inputFile(char &start , char &end);
 

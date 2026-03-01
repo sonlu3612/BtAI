@@ -12,7 +12,7 @@
 
 using namespace std;
 
-bool cmp(Node a, Node b)
+bool cmp(Node_A_Star a, Node_A_Star b)
 {
     return a.f() < b.f();
 }
@@ -24,7 +24,7 @@ vector<Edge> adj[100];
 map<char, int> m;
 
 
-string printL(vector<Node> L)
+string printL(vector<Node_A_Star> L)
 {
     sort(L.begin(),L.end(),cmp);
 
@@ -88,7 +88,7 @@ void inputFile(char &start,char &end)
 
 void A_Star(char start,char end)
 {
-    vector<Node> L;
+    vector<Node_A_Star> L;
 
     map<char,int> g;
 
@@ -116,7 +116,7 @@ void A_Star(char start,char end)
 
         sort(L.begin(), L.end(), cmp);
 
-        Node u = L.front();
+        Node_A_Star u = L.front();
 
         L.erase(L.begin());
 

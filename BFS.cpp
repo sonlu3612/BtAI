@@ -1,7 +1,7 @@
 #include "bestfirst.h"
 #include <iostream>
-#include <unordered_map>
-#include <unordered_set>
+// #include <unordered_map>
+// #include <unordered_set>
 #include <vector>
 #include <queue>
 #include <fstream>
@@ -21,12 +21,12 @@ using namespace std;
 //     }
 // };
 
-// unordered_map<string, vector<string>> doThi;
-// unordered_map<string, int> h;
+unordered_map<string, vector<string>> doThi;
+unordered_map<string, int> h;
 
 
-void inputFile(string &trangThaiDau, string &trangThaiKetThuc){
-	ifstream fin("input2.txt");
+void inputFile(string &trangThaiDau, string &trangThaiKetThuc, const string& filename){
+	ifstream fin(filename);
 	
 	if(!fin){
 		cout <<"Khong mo duoc file!\n";
@@ -83,7 +83,7 @@ void Best_First_Search(string trangThaiDau, string trangThaiKetThuc){
 	
 	ofstream fout("output.txt");
 	
-	priority_queue<Node> L;
+	priority_queue<Node_bfs> L;
 	
 	L.push({trangThaiDau,h[trangThaiDau]});
 	
@@ -97,7 +97,7 @@ void Best_First_Search(string trangThaiDau, string trangThaiKetThuc){
 	unordered_map<string, string> p;
 	
 	while(!L.empty()){
-		Node u = L.top();
+		Node_bfs u = L.top();
 		L.pop();
 		
 		if(dsTTDaDuyet.count(u.name)) continue;
@@ -129,9 +129,9 @@ void Best_First_Search(string trangThaiDau, string trangThaiKetThuc){
 				keStr.pop_back();
 		}
 		
-		priority_queue<Node> temp = L;
+		priority_queue<Node_bfs> temp = L;
         while(!temp.empty()){
-            Node t = temp.top();
+            Node_bfs t = temp.top();
             temp.pop();
             Lstr += t.name + to_string(t.h) + ",";
         }
@@ -158,9 +158,23 @@ void Best_First_Search(string trangThaiDau, string trangThaiKetThuc){
 		fout << p <<" ";
 	}
 	
-	fout.close();		
+	fout.close();
+	
+	cout << "Da xuat ket qua ra file output.txt\n";
 	
 	
+}
+
+void BestFirst_Run(int inputType , const string& filename)
+{
+    string start , goal;
+
+    // if(inputType==1)
+    //     inputKeyboard(start,goal);
+    // else
+    inputFile(start,goal,filename);
+
+    Best_First_Search(start,goal);
 }
 
 // int main(){

@@ -11,12 +11,12 @@
 using namespace std;
 
 // ===== NODE =====
-struct Node
+struct Node_bfs
 {
     string name;
     int h;
 
-    bool operator<(const Node& other) const{
+    bool operator<(const Node_bfs& other) const{
         return h > other.h;
     }
 };
