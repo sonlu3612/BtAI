@@ -2,6 +2,7 @@
 #include <vector>
 #include <conio.h>
 #include <windows.h>
+#include "bestfirst.h"
 
 // ===== include file thuat toan =====
 // #include "bfs.h"
@@ -223,11 +224,11 @@ int main()
                 {
                     // ===== BEST FIRST SEARCH =====
 
-                    // BestFirst_Run(inputType , filename);
+                    BestFirst_Run(inputType , filename);
 
                     // bestfirst.h :
-                    // void BestFirst_Run(int inputType,
-                    //                    const string& filename);
+                    void BestFirst_Run(int inputType,
+                                       const string& filename);
 
                     break;
                 }
