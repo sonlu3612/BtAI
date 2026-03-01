@@ -12,7 +12,7 @@
 
 using namespace std;
 
-bool cmp(Node a, Node b)
+bool cmp(Node_A_Star a, Node_A_Star b)
 {
     return a.f() < b.f();
 }
@@ -24,7 +24,7 @@ vector<Edge> adj[100];
 map<char, int> m;
 
 
-string printL(vector<Node> L)
+string printL(vector<Node_A_Star> L)
 {
     sort(L.begin(),L.end(),cmp);
 
@@ -134,7 +134,8 @@ void inputFile(char &start,char &end)
 
 void A_Star(char start, char end)
 {
-    vector<Node> L;
+    ofstream fout("output1.txt");
+    vector<Node_A_Star> L;
 
     map<char,int> g;
 
@@ -147,31 +148,33 @@ void A_Star(char start, char end)
 
     L.push_back({start, 0, m[start]});
 
-    cout << left << setw(6) << "TT" << setw(6) << "TTK" << setw(8) << "k(u,v)" << setw(8) << "h(v)" << setw(8) << "g(v)" << setw(8) << "f(v)" << setw(30) << "Danh sach L" << endl;
+    fout << left << setw(6) << "TT" << setw(6) << "TTK" << setw(8) << "k(u,v)" << setw(8) << "h(v)" << setw(8) << "g(v)" << setw(8) << "f(v)" << setw(30) << "Danh sach L" << endl;
 
-    cout << string(90, '-') << endl;
+    fout << string(90, '-') << endl;
 
 
     while(true)
     {
         if(L.empty())
         {
-            cout << "Khong ton tai duong di\n";
+            fout << "Khong ton tai duong di\n";
+            fout.close();
+	        cout << "Da xuat ket qua ra file output.txt\n";
             return;
         }
 
         sort(L.begin(), L.end(), cmp);
 
-        Node u = L.front();
+        Node_A_Star u = L.front();
 
         L.erase(L.begin());
 
         if(u.id == end)
         {
-            cout << string(90, '-') << endl;
-            cout << "\nThanh cong!\n";
+            fout << string(90, '-') << endl;
+            fout << "\nThanh cong!\n";
 
-            cout << "Duong di : ";
+            fout << "Duong di : ";
 
             vector<char> path;
 
@@ -190,13 +193,17 @@ void A_Star(char start, char end)
 
             for(int i = 0; i < path.size(); i++)
             {
-                cout << path[i];
+                fout << path[i];
 
                 if(i != path.size() - 1)
-                    cout << " -> ";
+                    fout << " -> ";
             }
 
-            cout << "\nDo dai = " << u.g << endl;
+            fout << "\nDo dai = " << u.g << endl;
+
+            fout.close();
+	
+	        cout << "Da xuat ket qua ra file output.txt\n";
 
             return;
         }
@@ -220,7 +227,7 @@ void A_Star(char start, char end)
                 L.push_back({v, gv, hv});
             }
 
-            cout << left << setw(6) << u.id << setw(6) << v << setw(8) << e.cost << setw(8) << hv << setw(8) << gv << setw(8) << fv << setw(30) << printL(L) << endl;
+            fout << left << setw(6) << u.id << setw(6) << v << setw(8) << e.cost << setw(8) << hv << setw(8) << gv << setw(8) << fv << setw(30) << printL(L) << endl;
         }
     }
 }

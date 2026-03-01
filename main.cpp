@@ -227,8 +227,7 @@ int main()
                     BestFirst_Run(filename);
 
                     // bestfirst.h :
-                    void BestFirst_Run(int inputType,
-                                       const string& filename);
+                    void BestFirst_Run(const string& filename);
 
                     break;
                 }
