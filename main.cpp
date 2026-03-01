@@ -6,7 +6,7 @@
 // ===== include file thuat toan =====
 // #include "bfs.h"
 // #include "bestfirst.h"
-// #include "astar.h"
+#include "A_Star.h"
 
 using namespace std;
 
@@ -45,9 +45,7 @@ void drawMenu(int selected)
 
             cout << " <";
 
-            SetConsoleTextAttribute(
-                GetStdHandle(STD_OUTPUT_HANDLE),
-                7);
+            SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
         }
         else
         {
@@ -238,11 +236,10 @@ int main()
                 {
                     // ===== A STAR =====
 
-                    // AStar_Run(inputType , filename);
+                    AStar_Run(inputType , filename);
 
                     // astar.h :
-                    // void AStar_Run(int inputType,
-                    //                const string& filename);
+                    void AStar_Run(int inputType, const string& filename);
 
                     break;
                 }
