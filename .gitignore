@@ -1,29 +1,31 @@
-# Ignore everything
-*
-
-# Allow folders (để Git đi vào folder)
-!*/
-
-# Allow source code
-!*.cpp
-!*.h
-!*.txt
-!*.vscode
-!*.gitignore
-# ===== Explicit ignore thêm =====
+# Build output
+Debug/
+Release/
+x64/
+build/
 
 # Executable
 *.exe
 
-# Visual Studio / MSVC build files
+# MSVC build files
 *.obj
 *.pdb
 *.ilk
 *.idb
 
-# Temporary
+# Logs + temp
 *.log
 *.tmp
 
 # Windows
 Thumbs.db
+
+# VS cache
+.vs/
+
+# vscode settings (optional)
+.vscode/*
+!.vscode/settings.json
+
+# Git
+.gitignore
