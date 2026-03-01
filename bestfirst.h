@@ -35,6 +35,6 @@ void inputFile(string &trangThaiDau, string &trangThaiKetThuc, const string& fil
 
 void Best_First_Search(string trangThaiDau , string trangThaiKetThuc);
 
-void BestFirst_Run(int inputType , const string& filename);
+void BestFirst_Run(const string& filename);
 
 #endif

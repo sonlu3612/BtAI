@@ -224,7 +224,7 @@ int main()
                 {
                     // ===== BEST FIRST SEARCH =====
 
-                    BestFirst_Run(inputType , filename);
+                    BestFirst_Run(filename);
 
                     // bestfirst.h :
                     void BestFirst_Run(int inputType,

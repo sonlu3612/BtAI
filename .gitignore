@@ -1,0 +1,29 @@
+# Ignore everything
+*
+
+# Allow folders (để Git đi vào folder)
+!*/
+
+# Allow source code
+!*.cpp
+!*.h
+!*.txt
+!*.vscode
+!*.gitignore
+# ===== Explicit ignore thêm =====
+
+# Executable
+*.exe
+
+# Visual Studio / MSVC build files
+*.obj
+*.pdb
+*.ilk
+*.idb
+
+# Temporary
+*.log
+*.tmp
+
+# Windows
+Thumbs.db
