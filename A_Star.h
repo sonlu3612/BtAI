@@ -40,6 +40,6 @@ void inputFile(char &start , char &end);
 
 void A_Star(char start , char end);
 
-void AStar_Run(int inputType , const string& filename);
+void AStar_Run(const string& filename);
 
 #endif
