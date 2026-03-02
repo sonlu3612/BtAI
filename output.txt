@@ -1,9 +1,13 @@
-Phat trien TT     Trang thai ke       Danh sach L                   
+Phat trien TT     Trang thai ke       Danh sach Q                   
 -----------------------------------------------------------------
-A20               C15,D6,E7           D6,E7,C15                     
-D6                F10,I8              E7,I8,F10,C15                 
-E7                K12,G5              G5,I8,F10,K12,C15             
-G5                H3,B0               B0,H3,I8,F10,K12,C15          
-B0                TTKT-DUNG                                         
+A                 B,C,D               B,C,D                         
+B                 I,G                 C,D,I,G                       
+C                 E,F                 D,I,G,E,F                     
+D                 C,F                 I,G,E,F                       
+I                 G                   G,E,F                         
+G                                     E,F                           
+E                 G,K                 F,K                           
+F                 K                   K                             
+K                 TTKT-DUNG                                         
 
-KetQua: A E G B 
+Ket qua: A C E K 

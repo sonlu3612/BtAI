@@ -1,193 +1,133 @@
-#include "bestfirst.h"
+#include "BFS.h"
+
 #include <iostream>
-// #include <unordered_map>
-// #include <unordered_set>
 #include <vector>
 #include <queue>
 #include <fstream>
 #include <sstream>
 #include <iomanip>
 #include <algorithm>
-
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
-// struct Node{
-//     string name;
-//     int h;
-
-//     bool operator<(const Node& other) const{
-//         return h > other.h;
-//     }
-// };
-
-unordered_map<string, vector<string>> doThi;
-unordered_map<string, int> h;
+unordered_map<string, vector<string>> doThi1;
 
 
-void inputFile(string &trangThaiDau, string &trangThaiKetThuc, const string& filename){
-	ifstream fin(filename);
-	
-	if(!fin){
-		cout <<"Khong mo duoc file!\n";
-		exit(0);
-	}
-	
-	//So dinh
+void inputFile_BFS(string &start, string &goal, const string& filename){
+    ifstream fin(filename);
+
+    if(!fin){
+        cout << "Khong mo duoc file!\n";
+        exit(0);
+    }
+
     int n;
     fin >> n;
+    fin.ignore();
 
-
-    //nhap cap dinh - trong so
-    for(int i = 0; i <n; i++){
-        string v;
-        int w;
-        fin >> v >> w;
-        h[v] = w;
-    }
-    
-
-    //nhap do thi
-    for(int i = 0; i<n; i++){
+    // Nhập đồ thị (không trọng số, không dấu :)
+    for(int i = 0; i < n; i++){
         string dong;
-        getline(fin,dong);
+        getline(fin, dong);
 
         if(dong.empty()){
             i--;
             continue;
         }
 
-        int vitri = dong.find(':');
+        stringstream ss(dong);
+        string u;
+        ss >> u;   // đỉnh nguồn
 
-        string u = dong.substr(0,vitri);
-        string r = dong.substr(vitri+1);
-
-        //bo khoang trang dau
-        stringstream ss(r); //doc tung phan tu trong chuoi
-
-        string x;
-        while(ss>>x){
-            if(x!="0")
-                doThi[u].push_back(x);
+        string v;
+        while(ss >> v){
+            if(v != "0")
+                doThi1[u].push_back(v);
         }
     }
-	
-	 //Nhap TTD, TTKT
-    fin >> trangThaiDau >> trangThaiKetThuc;
 
-	fin.close();
-	
+    fin >> start >> goal;
+    fin.close();
 }
 
-void Best_First_Search(string trangThaiDau, string trangThaiKetThuc){
-	
-	ofstream fout("output.txt");
-	
-	priority_queue<Node_bfs> L;
-	
-	L.push({trangThaiDau,h[trangThaiDau]});
-	
-	fout <<left<< setw(18)<< "Phat trien TT"
-		<<setw(20) << "Trang thai ke" << setw(30) <<"Danh sach L" <<"\n";
-		
-	fout <<string(65,'-') <<"\n";
-	
-	unordered_set<string> dsTTDaDuyet;
-	
-	unordered_map<string, string> p;
-	
-	while(!L.empty()){
-		Node_bfs u = L.top();
-		L.pop();
-		
-		if(dsTTDaDuyet.count(u.name)) continue;
-		
-		dsTTDaDuyet.insert(u.name);
-		
-		string ttStr = u.name + to_string(u.h);
-		string keStr = "";
-		string Lstr = "";
-		
-		if(u.name == trangThaiKetThuc){
-			keStr = "TTKT-DUNG";
-			
-			fout <<left<< setw(18)<< ttStr
-		<<setw(20) << keStr << setw(30) <<" " <<"\n";
-			break;
-		}
-		
-		for(auto v:doThi[u.name]){
-			keStr += v + to_string(h[v]) + ",";
-			
-			if(!dsTTDaDuyet.count(v)){
-				p[v] = u.name;
-				L.push({v,h[v]});
-			}	
-		}
-		
-		if(!keStr.empty()){
-				keStr.pop_back();
-		}
-		
-		priority_queue<Node_bfs> temp = L;
-        while(!temp.empty()){
-            Node_bfs t = temp.top();
-            temp.pop();
-            Lstr += t.name + to_string(t.h) + ",";
+void BFS_Search(string start, string goal){
+    ofstream fout("output.txt");
+
+    queue<string> Q;
+    unordered_set<string> visited;
+    unordered_map<string, string> parent;
+
+    Q.push(start);
+    visited.insert(start);
+
+    fout << left << setw(18) << "Phat trien TT"
+         << setw(20) << "Trang thai ke"
+         << setw(30) << "Danh sach Q" << "\n";
+    fout << string(65, '-') << "\n";
+
+    while(!Q.empty()){
+        string u = Q.front();
+        Q.pop();
+
+        string keStr = "";
+        string Qstr = "";
+
+        if(u == goal){
+            fout << left << setw(18) << u
+                 << setw(20) << "TTKT-DUNG"
+                 << setw(30) << " " << "\n";
+            break;
         }
 
-        if(!Lstr.empty())
-            Lstr.pop_back();
-		
-		fout <<left<< setw(18)<< ttStr
-		<<setw(20) << keStr << setw(30) << Lstr <<"\n";
-	}
-	
-	vector<string> kq;
-	string x = trangThaiKetThuc;
-	while(x != trangThaiDau){
-		kq.push_back(x);
-		x = p[x];
-	}
-	
-	kq.push_back(trangThaiDau);
-	reverse(kq.begin(),kq.end());
-	
-	fout << "\nKetQua: ";
-	for(auto p:kq){
-		fout << p <<" ";
-	}
-	
-	fout.close();
-	
-	cout << "Da xuat ket qua ra file output.txt\n";
-	
-	
+        for(auto v : doThi1[u]){
+            keStr += v + ",";
+
+            if(!visited.count(v)){
+                visited.insert(v);
+                parent[v] = u;
+                Q.push(v);
+            }
+        }
+
+        if(!keStr.empty()) keStr.pop_back();
+
+        queue<string> temp = Q;
+        while(!temp.empty()){
+            Qstr += temp.front() + ",";
+            temp.pop();
+        }
+        if(!Qstr.empty()) Qstr.pop_back();
+
+        fout << left << setw(18) << u
+             << setw(20) << keStr
+             << setw(30) << Qstr << "\n";
+    }
+
+    
+    vector<string> path;
+    string x = goal;
+
+    while(x != start){
+        path.push_back(x);
+        x = parent[x];
+    }
+    path.push_back(start);
+    reverse(path.begin(), path.end());
+
+    fout << "\nKet qua: ";
+    for(auto &p : path)
+        fout << p << " ";
+
+    fout.close();
+    cout << "Da xuat ket qua ra file output.txt\n";
 }
 
-void BestFirst_Run(const string& filename)
-{
-    string start , goal;
+void BFS_Run(const string& filename){
+    doThi1.clear();
+    string start, goal;
 
-    // if(inputType==1)
-    //     inputKeyboard(start,goal);
-    // else
-    inputFile(start,goal,filename);
-
-    Best_First_Search(start,goal);
+    inputFile_BFS(start, goal, filename);
+    BFS_Search(start, goal);
 }
-
-// int main(){
-	
-// 	string trangThaiDau, trangThaiKetThuc;
-	
-// 	inputFile(trangThaiDau, trangThaiKetThuc);
-	
-// 	Best_First_Search(trangThaiDau, trangThaiKetThuc);
-  
-   
-// }
-
-
-
-

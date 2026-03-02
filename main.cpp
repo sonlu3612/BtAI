@@ -5,7 +5,7 @@
 #include "bestfirst.h"
 
 // ===== include file thuat toan =====
-// #include "bfs.h"
+#include "bfs.h"
 // #include "bestfirst.h"
 #include "A_Star.h"
 
@@ -208,38 +208,16 @@ int main()
             switch(selected)
             {
                 case 0:
-                {
-                    // ===== BFS =====
-
-                    // BFS_Run(inputType , filename);
-
-                    // bfs.h :
-                    // void BFS_Run(int inputType,
-                    //              const string& filename);
-
+                    BFS_Run(filename);
                     break;
-                }
 
                 case 1:
-                {
-                    // ===== BEST FIRST SEARCH =====
-
                     BestFirst_Run(filename);
-
-                    // bestfirst.h :
-                    void BestFirst_Run(const string& filename);
-
                     break;
-                }
 
                 case 2:
-                {
                     AStar_Run(filename);
-
-                    void AStar_Run(const string& filename);
-
                     break;
-                }
             }
 
             system("pause");
